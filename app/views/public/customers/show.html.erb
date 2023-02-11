@@ -1,0 +1,21 @@
+<!-- ユーザーの詳細 -->
+<div>
+  <h3><%= @customer.name %></h3>
+  <%= image_tag @customer.get_profile_image(100,100) %>
+  <% if @customer == current_customer %>
+    <p><%= link_to "プロフィール編集", edit_public_customer_path(@customer) %></p>
+  <% end %>
+</div>
+
+<!-- ユーザーの投稿一覧 -->
+<h3>レビュー履歴</h3>
+<% @reviews.each do |review| %>
+<div>
+  <%= link_to public_reviews_path(review.id) do %>
+    <%= image_tag review.get_image %>
+  <% end %>
+  <p>ショップ名：<%= review.item %></p>
+  <p>説明：<%= review.content %></p>
+  <p>ユーザーネーム：<%= review.customer.name %></p>
+</div>
+<% end %>
