@@ -3,6 +3,12 @@ class Review < ApplicationRecord
   belongs_to :customer
   belongs_to :production_area, dependent: :destroy, optional: true
   has_many   :comments, dependent: :destroy
+  has_many   :favorites, dependent: :destroy
+    
+    
+  def favorited_by?(customer)
+    favorites.exists?(customer_id: customer.id)
+  end  
     
   def get_image
     unless image.attached?

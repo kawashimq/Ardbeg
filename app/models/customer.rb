@@ -6,7 +6,7 @@ class Customer < ApplicationRecord
          
   has_many :reviews, dependent: :destroy
   has_many :comments, dependent: :destroy
-  
+  has_many :favorites, dependent: :destroy
   
   #ユーザーごとのプロフィール画像を保存
   has_one_attached :profile_image
