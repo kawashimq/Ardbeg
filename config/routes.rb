@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get 'about' => "homes#about"
     resources :reviews do
       resources :comments
+      resource  :favorites, only: [:create, :destroy]
     end 
     resources :customers, only: [:show, :edit, :update]
   end

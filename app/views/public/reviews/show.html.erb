@@ -9,13 +9,13 @@
   <% end %>
 </div>
 
+<!--コメント機能-->
 <div>
   <p>コメント件数：<%= @review.comments.count %></p>
   <% @review.comments.each do |comment| %>
     <p><%= image_tag comment.customer.get_profile_image(100,100) %></p>
     <%= comment.customer.name %>
     <%= comment.created_at.strftime('%Y/%m/%d') %>
-    <!--表示されるが文字ではなく0で表示されてしまう-->
     <%= comment.detail %>
   <% end %>
 </div>
@@ -25,3 +25,18 @@
     <%= f.submit "送信する" %>
   <% end %>
 </div>
+
+<!--いいね機能-->
+<% if @review.favorited_by?(current_customer) %>
+  <p>
+    <%= link_to public_review_favorites_path(@review), method: :delete do %>
+      ♥<%= @review.favorites.count %> いいね
+    <% end %>
+  </p>
+<% else %>
+  <p>
+    <%= link_to public_review_favorites_path(@review), method: :post do %>
+      ♡<%= @review.favorites.count %> いいね
+    <% end %>
+  </p>
+<% end %>
