@@ -17,6 +17,9 @@
     <%= comment.customer.name %>
     <%= comment.created_at.strftime('%Y/%m/%d') %>
     <%= comment.detail %>
+    <% if comment.customer_id == current_customer.id %>
+      <%= link_to "削除", public_review_comment_path(comment.review, comment), method: :delete %>
+    <% end %>
   <% end %>
 </div>
 <div>
@@ -30,13 +33,13 @@
 <% if @review.favorited_by?(current_customer) %>
   <p>
     <%= link_to public_review_favorites_path(@review), method: :delete do %>
-      ♥<%= @review.favorites.count %> いいね
+      ♥<%= @review.favorites.count %> 役に立った
     <% end %>
   </p>
 <% else %>
   <p>
     <%= link_to public_review_favorites_path(@review), method: :post do %>
-      ♡<%= @review.favorites.count %> いいね
+      ♡<%= @review.favorites.count %> 役に立った
     <% end %>
   </p>
 <% end %>

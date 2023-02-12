@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def set_search
+      @search = Customer.ransack(params[:q])#ransackのコントローラー
+  end 
 
   protected
 

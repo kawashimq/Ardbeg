@@ -1,10 +1,23 @@
-<% @reviews.each do |review| %>
-<div>
-  <%= image_tag review.get_image %>
-  <p>投稿ユーザー画像：<%= image_tag review.customer.get_profile_image(100,100) %></p>
-  <p>ショップ名：<%= review.item %></p>
-  <p>説明：<%= review.content %></p>
-  <%= link_to '詳細', public_review_path(review.id) %>
-  <p>ユーザーネーム：<%= review.customer.name %></p>
-</div>
+<%= search_form_for @q,url: public_reviews_path do |f|%>
+  <%= f.text_field :content_cont %>
+  <%= f.submit "検索" %>
 <% end %>
+
+<!--検索がヒットしなかった場合-->
+
+<% if @reviews.present? %>
+  <% @reviews.each do |review| %>
+  <div>
+    <%= image_tag review.get_image %>
+    <p>投稿ユーザー画像：<%= image_tag review.customer.get_profile_image(100,100) %></p>
+    <p>ショップ名：<%= review.item %></p>
+    <p>説明：<%= review.content %></p>
+    <%= link_to '詳細', public_review_path(review.id) %>
+    <p>ユーザーネーム：<%= review.customer.name %></p>
+  </div>
+  <% end %>
+  <% else %>
+<!--検索がヒットしなかった場合-->
+ <p>検索結果はありません</p>
+<% end %>
+

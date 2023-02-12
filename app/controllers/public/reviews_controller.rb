@@ -1,11 +1,19 @@
 class Public::ReviewsController < ApplicationController
   
+  before_action :search
   def new
     @review = Review.new
   end
     
+  def search
+    @q = Review.ransack(params[:q])
+    @reviews = @q.result(distinct: true)
+  end
+  
   def index
-    @reviews = Review.all
+    @q = Review.ransack(params[:q])
+    @ransack_reviews = @q.result(distinct: true)
+    @reviews = @q.result(distinct: true)
   end
   
   def create
@@ -19,6 +27,7 @@ class Public::ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @reviews = Review.all
     @comment = Comment.new
+    @comments = Comment.all
   end
   
   def edit
