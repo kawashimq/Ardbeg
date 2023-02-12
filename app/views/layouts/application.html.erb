@@ -12,7 +12,7 @@
 
   <body>
     <header>
-   <% if customer_signed_in? %>
+      <% if customer_signed_in? %>
         
         <%= link_to '投稿フォーム', new_public_review_path %>
         
@@ -21,16 +21,20 @@
         <%= link_to 'マイページ', public_customer_path(current_customer.id) %>
 
         <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+        
+        <div class="float-right">
+          <%= render 'layouts/search' %>
+        </div>
 
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_customer_registration_path %>
-      </li>
-      <li>
+      <% else %>
+    
+        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+        
         <%= link_to "ログイン", new_customer_session_path %>
-      </li>
-    <% end %>
-</header>
+        
+        <%= link_to '原産地名一覧', admin_production_areas_path %>
+      <% end %>
+    </header>
     <%= yield %>
   </body>
 </html>

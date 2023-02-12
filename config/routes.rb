@@ -1,27 +1,28 @@
 Rails.application.routes.draw do
-  
+
   # 顧客側のルーティング設定
+  root to: "public/homes#top"
   
-    root to: "public/homes#top"
-    
-    namespace :public do
+  namespace :public do
     get 'about' => "homes#about"
+    get "search" => "searches#search"
     resources :reviews do
       resources :comments
       resource  :favorites, only: [:create, :destroy]
-    end 
+  end 
     resources :customers, only: [:show, :edit, :update]
-  end
-  
-  devise_scope :customer do
-    post 'customers/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
 
   # 管理者側のルーティング設定
   namespace :admin do
+    get '/' => "homes#top"
+    resources :production_areas, only: [:create, :edit, :index, :update, :destroy]
   end
   
   
+  devise_scope :customer do
+    post 'customers/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
   
   
   
