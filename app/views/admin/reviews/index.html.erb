@@ -1,16 +1,7 @@
-<%= search_form_for @q,url: public_reviews_path do |f|%>
+<%= search_form_for @q,url: admin_reviews_path do |f|%>
   <%= f.text_field :content_cont %>
   <%= f.submit "検索" %>
 <% end %>
-
-
-
-<h4>原産地別で探す</h4>
-
-<% @production_areas.each do |area| %>
-  <%= link_to area.genre_name, public_reviews_path(production_area_id: area.id) %>
-<% end %>
-
 
 <!--検索がヒットしなかった場合-->
 
@@ -22,7 +13,8 @@
     <p>ショップ名：<%= review.item %></p>
     <p>原産地名：<%= review.production_area.genre_name %></p>
     <p>説明：<%= review.content %></p>
-    <%= link_to '詳細', public_review_path(review.id) %>
+    <%= link_to '詳細', admin_review_path(review.id) %>
+    <%= link_to "レビュー削除", admin_review_path(review), method: :delete %>
     <p>ユーザーネーム：<%= review.customer.name %></p>
   </div>
   <% end %>
@@ -30,5 +22,3 @@
 <!--検索がヒットしなかった場合-->
  <p>検索結果はありません</p>
 <% end %>
-
-<%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, method: :post %>

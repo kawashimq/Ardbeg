@@ -11,6 +11,7 @@
     <%= image_tag review.get_image %>
     <p>投稿ユーザー画像：<%= image_tag review.customer.get_profile_image(100,100) %></p>
     <p>ショップ名：<%= review.item %></p>
+    <p>原産地名：<%= review.production_area.genre_name %></p>
     <p>説明：<%= review.content %></p>
     <%= link_to '詳細', public_review_path(review.id) %>
     <p>ユーザーネーム：<%= review.customer.name %></p>

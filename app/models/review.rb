@@ -1,7 +1,7 @@
 class Review < ApplicationRecord
   has_one_attached :image
   belongs_to :customer
-  belongs_to :production_area, dependent: :destroy, optional: true
+  belongs_to :production_area#, optional: true
   has_many   :comments, dependent: :destroy
   has_many   :favorites, dependent: :destroy
     

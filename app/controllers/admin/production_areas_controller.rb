@@ -21,6 +21,12 @@ def update
    redirect_to admin_production_areas_path
 end
 
+def destroy
+  production_area = ProductionArea.find(params[:id])
+  production_area.destroy
+  redirect_to admin_production_areas_path
+end
+
   private
   def production_area_params
     params.require(:production_area).permit(:genre_name)

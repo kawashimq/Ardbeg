@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'customers/index'
+  end
+  namespace :admin do
+    get 'reviews/index'
+    get 'reviews/destroy'
+  end
   # 顧客側のルーティング設定
   root to: "public/homes#top"
   
@@ -22,7 +29,9 @@ Rails.application.routes.draw do
   # 管理者側のルーティング設定
   namespace :admin do
     get '/' => "homes#top"
-    resources :comments, only: [:destroy, :index]
+    resources :reviews, only: [:index, :show, :destroy] do
+      resources :comments, only: [:destroy]
+    end
     resources :production_areas, only: [:create, :edit, :index, :update, :destroy]
   end
   

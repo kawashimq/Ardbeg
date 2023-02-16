@@ -25,6 +25,9 @@
      <% @production_area.each do |production_area| %>
      <td><%= production_area.genre_name %></td>
      <td><%= link_to "編集する", edit_admin_production_area_path(production_area.id), class:'btn btn-sm px-4' %></td>
+     <td>
+       <%= link_to "削除", admin_production_area_path(production_area.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      </td>
     </tr>
    <% end %>
      </tbody>
