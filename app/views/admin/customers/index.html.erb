@@ -1,2 +1,38 @@
-<h1>Admin::Customers#index</h1>
-<p>Find me in app/views/admin/customers/index.html.erb</p>
+<h6 class="d-inline-block font-weight-bold mb-3 mt-4 ml-5 px-3" style="background-color: ghostwhite">会員一覧</h6>
+
+  <table  class="ml-auto mr-auto w-75">
+  <thead class="border-bottom border-top border-secondary" style="background-color: ghostwhite">
+    <tr>
+      <th>会員ID</th>
+      <th>氏名</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+  <tbody class="border-bottom border-secondary font-weight-bold">
+      <% @customers.each do |customer| %>
+    <tr>
+      <td class="py-1"><%= customer.id %></td>
+      <td>
+          <%= link_to admin_customer_path(customer.id) do %>
+            <%= customer.name %>
+          <% end %>
+      </td>
+      <td><%= customer.email %></td>
+      <td>
+        <% if customer.is_ban %>
+            <div>BAN済</div>
+          <% else %>
+            <div class="text-success">有効</div>
+          <% end %>
+      </td>
+    </tr>
+      <% end %>
+  </tbody>
+</table>
+
+<!--<nav aria-label="Page navigation">-->
+<!--  <div class="pagination justify-content-center">-->
+<!--    %= paginate @customers %>-->
+<!--  </div>-->
+<!--</nav>-->

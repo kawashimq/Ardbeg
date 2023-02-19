@@ -7,6 +7,8 @@ class Customer < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :rooms
+
   
   #ユーザーごとのプロフィール画像を保存
   has_one_attached :profile_image
@@ -14,6 +16,8 @@ class Customer < ApplicationRecord
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |customer|
       customer.password = SecureRandom.urlsafe_base64
+      customer.password_confirmation = customer.password
+      customer.name = "ゲストユーザー"
     end
   end
   

@@ -16,6 +16,7 @@ class Admin::ReviewsController < ApplicationController
     @comments = Comment.all
   end
 
+
   def destroy
     review = Review.find(params[:id])
     review.destroy

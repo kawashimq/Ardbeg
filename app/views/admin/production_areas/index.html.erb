@@ -7,7 +7,8 @@
    <div class="row">
     <label class="col-md-2 col-sm-10 col-form-label w-100 d-inline">原産地名</label>
       <div class="col-md-2 col-sm-10 d-inline"><%= f.text_field :genre_name, class: "form-control" %></div>
-
+      <p>画像を追加</p>
+      <%= f.file_field :area_image, accept: "image/*" %>
    <div class="actions col-md-3"><%= f.submit '新規登録', class:'btn btn-sm px-4 w-50' %></div>
    <% end %>
    </div>

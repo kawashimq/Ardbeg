@@ -3,12 +3,15 @@
   <%= f.submit "検索" %>
 <% end %>
 
-
-
 <h4>原産地別で探す</h4>
 
 <% @production_areas.each do |area| %>
   <%= link_to area.genre_name, public_reviews_path(production_area_id: area.id) %>
+  <% if area.area_image.attached? %>
+    <%= image_tag area.area_image, size: "100x100" %>
+  <% else %>
+    <%= image_tag 'no_image', size: "100x100" %>
+  <% end %>
 <% end %>
 
 
@@ -17,8 +20,8 @@
 <% if @reviews.present? %>
   <% @reviews.each do |review| %>
   <div>
-    <%= image_tag review.get_image %>
-    <p>投稿ユーザー画像：<%= image_tag review.customer.get_profile_image(100,100) %></p>
+    <%= image_tag review.get_image, size:"250x250" %>
+    <p>投稿ユーザー画像：<%= image_tag review.customer.get_profile_image(80,80) %></p>
     <p>ショップ名：<%= review.item %></p>
     <p>原産地名：<%= review.production_area.genre_name %></p>
     <p>説明：<%= review.content %></p>
@@ -31,4 +34,3 @@
  <p>検索結果はありません</p>
 <% end %>
 
-<%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, method: :post %>

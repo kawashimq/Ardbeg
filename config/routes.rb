@@ -1,21 +1,20 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-    get 'customers/index'
-  end
-  namespace :admin do
-    get 'reviews/index'
-    get 'reviews/destroy'
-  end
-  # 顧客側のルーティング設定
+ 
   root to: "public/homes#top"
+  # DM機能のルーティング設定
+  resources :rooms, :only => [:show, :create] do
+    resources :messages, :only => [:create]
+  end
   
+  # 検索機能のルーティング設定
     resources :reviews do
       collection do 
         get "search"
       end
     end
-  
+    
+  # 顧客側のルーティング設定
   namespace :public do
     get 'about' => "homes#about"
     get "search" => "searches#search"
@@ -29,6 +28,7 @@ Rails.application.routes.draw do
   # 管理者側のルーティング設定
   namespace :admin do
     get '/' => "homes#top"
+    resources :customers, only: [:index, :show, :edit, :update]
     resources :reviews, only: [:index, :show, :destroy] do
       resources :comments, only: [:destroy]
     end

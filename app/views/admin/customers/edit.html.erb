@@ -1,0 +1,38 @@
+<h6 class="d-inline-block mb-4 mt-4 ml-5 px-3" style="background-color: ghostwhite">
+  <stronge class="font-weight-bold"><%= @customer.name %></stronge>さんの<stronge class="font-weight-bold">情報編集</stronge>
+</h6>
+<% if @customer.email == 'guest@example.com'%>
+      <p>ゲストユーザーはユーザー情報の編集ができません。</p>
+  <% else %>
+    <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch do |f| %>
+
+    <section class="container small">
+      <div class="row flex-nowrap">
+        <div class="col-md-2">
+          <h6 class="mb-3">会員ID</h6>
+          <h6 class="mb-3">氏名</h6>
+          <h6 class="mb-1"><%= f.label :"メールアドレス" %></h6>
+          <h6>会員ステータス</h6>
+        </div>
+    
+        <div class="col-md-10">
+          <div class="mb-3"><%= @customer.id %></div>
+          <div class="row">
+            <div class="col-3">
+              <div><%= f.text_field :name, autofocus: true, autocomplete: "last_name", class:'mb-2' %></div>
+            </div>
+          </div>
+            <div class="mb-2"><%= f.email_field :email, autofocus: true, autocomplete: "email" %></div>
+            <div class="mb-2">
+              <%= f.radio_button :is_ban, "false" %>
+              <%= f.label :is_ban, "有効" %>
+              <%= f.radio_button :is_ban, "true" %>
+              <%= f.label :is_ban, "BAN" %>
+            </div>
+            <div class="form-group">
+            <%= f.submit '編集を保存', class:'btn btn-sm px-4', style:"width: 250px; background-color: #F3F1EA;" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+<% end %>

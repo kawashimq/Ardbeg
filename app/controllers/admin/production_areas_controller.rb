@@ -29,6 +29,6 @@ end
 
   private
   def production_area_params
-    params.require(:production_area).permit(:genre_name)
+    params.require(:production_area).permit(:genre_name, :area_image)
   end
 end
