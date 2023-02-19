@@ -7,6 +7,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -26,8 +27,12 @@
                 投稿一覧
               <% end %>
               
-              <%= link_to admin_customers_index_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+              <%= link_to admin_customers_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
                 会員一覧
+              <% end %>
+              
+              <%= link_to admin_production_areas_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                原産地名一覧
               <% end %>
               
               <%= link_to destroy_admin_session_path, method: :delete,class: 'm-4 nav-link btn btn-outline-secondary' do %>
@@ -66,6 +71,8 @@
                 <div class="collapse navbar-collapse justify-content-end">
                   <div class="navbar-nav ml-auto list-unstyled">
                     
+                    <li><%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, method: :post %></li>
+
                     <%= link_to new_customer_registration_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
                       新規登録
                     <% end %>
@@ -73,14 +80,11 @@
                     <%= link_to new_customer_session_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
                       ログイン
                     <% end %>
-                    
-                    <%= link_to admin_production_areas_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
-                      原産地名一覧
-                    <% end %>
                   </div>
                 </div>
               <% end %>
     </header>
+    <%= notice %>
     <%= yield %>
   </body>
 </html>

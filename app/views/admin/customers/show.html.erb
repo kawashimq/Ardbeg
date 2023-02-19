@@ -1,0 +1,42 @@
+<h6 class="d-inline-block mb-4 mt-4 ml-5 px-3" style="background-color: ghostwhite">
+  <stronge class="font-weight-bold"><%= @customer.name %></stronge>さんの<stronge class="font-weight-bold">詳細情報</stronge>
+</h6>
+
+<table class="ml-5 small font-weight-bold">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="pl-2 pb-2 w-25">会員ID</td>
+      <td class="pl-5 pb-2 w-75"><%= @customer.id %></td>
+    </tr>
+    <tr>
+      <td class="pl-2 pb-2 w-25">氏名</td>
+      <td class="pl-5 pb-2 w-75"><%= @customer.name %></td>
+    </tr>
+    <tr>
+      <td class="pl-2 pb-2 w-25">メールアドレス</td>
+      <td class="pl-5 pb-2 w-75"><%= @customer.email %></td>
+    </tr>    
+    <tr>
+      <td class="pl-2 pb-2 w-25">会員ステータス</td>
+        <td class="pl-5 pb-2 w-75">
+          <% if @customer.is_ban == true %>
+            <div>BAN済</div>
+          <% else %>
+            <div class="text-success">有効</div>
+          <% end %>
+        </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td class="pl-5">
+        <%= link_to '編集する', edit_admin_customer_path(@customer), class:'btn btn-sm', style:"background-color: #F3F1EA" %>
+      </td>
+    </tr>
+  </tbody>
+</table>

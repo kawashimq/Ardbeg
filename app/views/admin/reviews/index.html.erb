@@ -8,8 +8,8 @@
 <% if @reviews.present? %>
   <% @reviews.each do |review| %>
   <div>
-    <%= image_tag review.get_image %>
-    <p>投稿ユーザー画像：<%= image_tag review.customer.get_profile_image(100,100) %></p>
+    <%= image_tag review.get_image, size: "250x250" %>
+    <p>投稿ユーザー画像：<%= image_tag review.customer.get_profile_image(80,80) %></p>
     <p>ショップ名：<%= review.item %></p>
     <p>原産地名：<%= review.production_area.genre_name %></p>
     <p>説明：<%= review.content %></p>
