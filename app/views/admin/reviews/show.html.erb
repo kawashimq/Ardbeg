@@ -1,0 +1,22 @@
+<div>
+  <%= image_tag @review.get_image %>
+  <p>商品名 ：<%= @review.item %></p>
+  <p>説明：<%= @review.content %></p>
+  <p>投稿ユーザー画像：<%= image_tag @review.customer.get_profile_image(100,100) %></p>
+  <p>ユーザーネーム：<%= @review.customer.name %></p>
+  <% if @review.customer == current_customer %>
+    <%= link_to "レビュー削除", public_review_path(@review), method: :delete %>
+  <% end %>
+</div>
+
+<!--コメント機能-->
+<div>
+  <p>コメント件数：<%= @review.comments.count %></p>
+  <% @review.comments.each do |comment| %>
+    <p><%= image_tag comment.customer.get_profile_image(100,100) %></p>
+    <%= comment.customer.name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %>
+    <%= comment.detail %>
+      <%= link_to "削除", admin_review_comment_path(comment.review, comment), method: :delete %>
+  <% end %>
+</div>

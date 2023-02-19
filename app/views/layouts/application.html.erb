@@ -6,11 +6,81 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header style="width: 100%; background-color: #F3F1EA">
+      <div>
+        <nav class="navbar navbar-expand-sm">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="container-fluid">
+            
+            <% if admin_signed_in? %>
+              <div class="collapse navbar-collapse justify-content-end">
+                <div class="navbar-nav ml-auto list-unstyled">
+              <%=  link_to  admin_reviews_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                投稿一覧
+              <% end %>
+              
+              <%= link_to admin_customers_index_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                会員一覧
+              <% end %>
+              
+              <%= link_to destroy_admin_session_path, method: :delete,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                ログアウト
+              <% end %>
+                </div>
+              </div>
+          
+            <% elsif customer_signed_in? %>
+              <%= link_to root_path, class:'navbar-brand text-dark' do %>
+                Ardbeg
+              <% end %>
+              <div class="collapse navbar-collapse justify-content-end">
+                <div class="navbar-nav ml-auto list-unstyled">
+                  <!--logoの設定-->
+                  
+                  
+                  <%= link_to new_public_review_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                    投稿フォーム
+                  <% end %>
+                  
+                  <%= link_to public_reviews_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                    レビュー一覧
+                  <% end %>
+        
+                  <%= link_to public_customer_path(current_customer.id),class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                    マイページ
+                  <% end %>
+        
+                  <%= link_to destroy_customer_session_path, method: :delete,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                    ログアウト
+                  <% end %>
+                </div>
+              </div>
+              <% else %>
+                <div class="collapse navbar-collapse justify-content-end">
+                  <div class="navbar-nav ml-auto list-unstyled">
+                    
+                    <%= link_to new_customer_registration_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                      新規登録
+                    <% end %>
+                    
+                    <%= link_to new_customer_session_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                      ログイン
+                    <% end %>
+                    
+                    <%= link_to admin_production_areas_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                      原産地名一覧
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+    </header>
     <%= yield %>
   </body>
 </html>
