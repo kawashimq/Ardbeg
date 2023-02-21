@@ -5,33 +5,33 @@
    <%= form_with model: ProductionArea, url:admin_production_areas_path, local:true do |f| %>
 
    <div class="row">
-    <label class="col-md-2 col-sm-10 col-form-label w-100 d-inline">原産地名</label>
-      <div class="col-md-2 col-sm-10 d-inline"><%= f.text_field :genre_name, class: "form-control" %></div>
+    <label class="col-md-2 col-form-label w-100 d-inline">原産地名</label>
+      <div class="col-md-2 d-inline"><%= f.text_field :genre_name, class: "form-control" %></div>
       <p>画像を追加</p>
       <%= f.file_field :area_image, accept: "image/*" %>
-   <div class="actions col-md-3"><%= f.submit '新規登録', class:'btn btn-sm px-4 w-50' %></div>
+   <div class="actions col-md-3"><%= f.submit '新規登録', class:'btn btn-sm px-4 w-50 btn btn-outline-primary' %></div>
    <% end %>
    </div>
    
    <!--一覧表示-->
-   <table class="table mt-5 col-md-4">
-    <thead style="background-color: ghostwhite">
-     <tr>
-      <th>原産地</th>
-      <th style="width: 40%">
-     </tr>
-  </thead>
-   <tbody>
-    <tr>
-     <% @production_area.each do |production_area| %>
-     <td><%= production_area.genre_name %></td>
-     <td><%= link_to "編集する", edit_admin_production_area_path(production_area.id), class:'btn btn-sm px-4' %></td>
-     <td>
-       <%= link_to "削除", admin_production_area_path(production_area.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-      </td>
-    </tr>
-   <% end %>
-     </tbody>
-    </table>
-   </div>
- </body>
+    <table class="table mt-5">
+      <thead style="background-color: ghostwhite">
+        <tr>
+         <th>原産地</th>
+         <th style="width: 40%">
+       </tr>
+    </thead>
+    <tbody>
+      <tr>
+       <% @production_area.each do |production_area| %>
+       <td><%= production_area.genre_name %></td>
+       <td><%= link_to "編集する", edit_admin_production_area_path(production_area.id), class:'btn btn-success btn-sm px-4' %></td>
+       <td>
+         <%= link_to "削除", admin_production_area_path(production_area.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:'btn btn-danger' %>
+       </td>
+      </tr>
+    <% end %>
+      </tbody>
+     </table>
+    </div>
+  </body>

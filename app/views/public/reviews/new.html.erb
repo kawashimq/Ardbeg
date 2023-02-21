@@ -1,13 +1,15 @@
-<h1>画像投稿フォーム</h1>
-  <%= form_with model: @review, url:public_reviews_path do |f| %>
-    <h4>画像投稿</h4>
-      <%= f.file_field :image, accept: "image/*" %>
-    <h4>商品名</h4>
-      <%= f.text_field :item %>
-    <h4>口コミ</h4>
-      <%= f.text_area :content %>
-    <h4>原産地</h4>
-    <%= f.select :production_area_id, options_from_collection_for_select(ProductionArea.all, :id, :genre_name), {} %>
-    
-    <%= f.submit '投稿' %>
-  <% end %>
+<%= form_with model: @review, url:public_reviews_path do |f| %>
+  <div class="mb-3 text-center">
+    <label class="mt-2">画像投稿</label>
+      <div><%= f.file_field :image, accept: "image/*" %></div>
+    <label class="mt-2">商品名</label>
+      <div><%= f.text_field :item, class: "w-25" %></div>
+    <label class="mt-2">口コミ</label>
+      <div><%= f.text_area :content, class: "w-25", rows: '4' %></div>
+    <label>原産地</label>
+    <!--中の文字を中央ぞろえにしたい-->
+    <div><%= f.select :production_area_id, options_from_collection_for_select(ProductionArea.all, :id, :genre_name), {}, class: "w-25" %></div>
+    <div><%= f.submit '投稿', class: "w-25 btn btn-outline-primary mt-3" %></div>
+  </div>
+<% end %>
+  

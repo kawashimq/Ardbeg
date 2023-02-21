@@ -1,27 +1,32 @@
-<div>
-  <%= image_tag @review.get_image, size:"250x250" %>
-  <p>商品名 ：<%= @review.item %></p>
-  <p>説明：<%= @review.content %></p>
-  <p>投稿ユーザー画像：<%= image_tag @review.customer.get_profile_image(80,80) %></p>
-  <p>ユーザーネーム：<%= @review.customer.name %></p>
+<div class="text-center">
+  <p>
+    <%= image_tag @review.customer.get_profile_image(80,80), class:"rounded-circle mr-3" %>
+    <%= @review.customer.name %>
+  </p>
+  <%= image_tag @review.get_image, size:"400x400" %>
+  <p class="mt-2"><%= @review.item %></p>
+  <p class="mt-2">説明：<%= @review.content %></p>
+  
   <% if @review.customer == current_customer %>
     <%= link_to "レビュー削除", public_review_path(@review), method: :delete %>
   <% end %>
   <% if @review.customer == current_customer %>
     <p><%= link_to "レビュー編集", edit_public_review_path(@review) %></p>
   <% end %>
-</div>
-
+  
 <!--コメント一覧-->
-<div class="new-comment">
-  <%= render 'public/comments/form', review: @review, comment: @comment %>
-</div>
-<!--コメントフォーム-->
-<div id="comments_area"> 
-  <%= render 'public/comments/review_comments', review: @review %>
-</div>
+  <div class="new-comment">
+    <%= render 'public/comments/form', review: @review, comment: @comment %>
+  </div>
+  <!--コメントフォーム-->
+  <!--コメントのフォームをでかくしたい-->
+  <div id="comments_area" > 
+    <%= render 'public/comments/review_comments', review: @review %>
+  </div>
+  
+  <!--いいね機能-->
+  <div id="favorite_buttons_<%= @review.id %>">
+    <%= render "public/favorites/favorite", review: @review %>
+  </div>
 
-<!--いいね機能-->
-<div id="favorite_buttons_<%= @review.id %>">
-  <%= render "public/favorites/favorite", review: @review %>
 </div>

@@ -1,22 +1,22 @@
-<div>
-  <%= image_tag @review.get_image, size: "250x250" %>
-  <p>商品名 ：<%= @review.item %></p>
-  <p>説明：<%= @review.content %></p>
-  <p>投稿ユーザー画像：<%= image_tag @review.customer.get_profile_image(80,80) %></p>
-  <p>ユーザーネーム：<%= @review.customer.name %></p>
-  <% if @review.customer == current_customer %>
-    <%= link_to "レビュー削除", public_review_path(@review), method: :delete %>
-  <% end %>
-</div>
+<div class="text-center">
+  <div>
+    <%= image_tag @review.customer.get_profile_image(80,80), class:"rounded-circle mr-3" %>
+    <%= @review.customer.name %>
+  </div>
+  <%= image_tag @review.get_image, size:"400x400" %>
+  <div class="mt-2"><%= @review.item %></p>
+  <div class="mt-2">説明：<%= @review.content %></p>
+  <%= link_to "レビュー削除", public_review_path(@review), method: :delete, class:"btn btn-outline-danger" %>
 
-<!--コメント機能-->
-<div>
-  <p>コメント件数：<%= @review.comments.count %></p>
+<!--コメント削除機能-->
+  <div class="mt-4 mb-3 border-bottom"><%= @review.comments.count %>件のコメント</div>
   <% @review.comments.each do |comment| %>
-    <p><%= image_tag comment.customer.get_profile_image(80,80) %></p>
-    <%= comment.customer.name %>
+    <div>
+      <%= image_tag comment.customer.get_profile_image(80,80), class:"rounded-circle mr-3" %>
+      <%= comment.customer.name %>
+    </div>
     <%= comment.created_at.strftime('%Y/%m/%d') %>
     <%= comment.detail %>
-      <%= link_to "削除", admin_review_comment_path(comment.review, comment), method: :delete %>
+      <%= link_to "削除", admin_review_comment_path(comment.review, comment), method: :delete, data: {confirm: "本当に削除しますか？"}, class:"btn btn-outline-danger btn-sm" %>
   <% end %>
 </div>

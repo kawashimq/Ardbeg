@@ -55,7 +55,7 @@
                   <% end %>
                   
                   <%= link_to public_reviews_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
-                    レビュー一覧
+                    口コミ一覧
                   <% end %>
         
                   <%= link_to public_customer_path(current_customer.id),class: 'm-4 nav-link btn btn-outline-secondary' do %>
@@ -68,11 +68,14 @@
                 </div>
               </div>
               <% else %>
+                <%= link_to root_path, class:'navbar-brand text-dark' do %>
+                  Ardbeg
+                <% end %>
                 <div class="collapse navbar-collapse justify-content-end">
                   <div class="navbar-nav ml-auto list-unstyled">
                     
-                    <li><%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, method: :post %></li>
-
+                    <li><%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, method: :post, class: 'm-4 nav-link btn btn-outline-secondary' %></li>
+                    
                     <%= link_to new_customer_registration_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
                       新規登録
                     <% end %>
@@ -87,4 +90,26 @@
     <%= notice %>
     <%= yield %>
   </body>
-</html>
+  
+  <footer>
+  <div class="w-100 mt-5 mb-5" style="background-color: #F3F1EA; height: 70px"></div>
+  <div class="container small my-5 pt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-3">
+        <%= link_to root_path, class:'navbar-brand text-dark' do %>
+          Ardbeg
+        <% end %>
+      </div>
+      <div class="col-md-2">
+        <p>配送・支払い方法</p>
+        <p>ご利用ガイド</p>
+        <p>お問い合わせ</p>
+      </div>
+      <div class="col-md-2">
+        <p>よくあるご質問</p>
+        <p>プライバシーポリシー</p>
+        <p>特定商取引法に基づく表記</p>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-4" style="font-size: 5px;">
+      ©2023 Ardbeg. All Rights Reserved.

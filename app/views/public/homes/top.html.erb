@@ -1,36 +1,42 @@
 <%= search_form_for @q,url: public_reviews_path do |f|%>
-  <%= f.text_field :content_cont %>
-  <%= f.submit "検索" %>
-<% end %>
-
-<h4>原産地別で探す</h4>
-
-<% @production_areas.each do |area| %>
-  <%= link_to area.genre_name, public_reviews_path(production_area_id: area.id) %>
-  <% if area.area_image.attached? %>
-    <%= image_tag area.area_image, size: "100x100" %>
-  <% else %>
-    <%= image_tag 'no_image', size: "100x100" %>
+<div class="input-group w-50 mt-2 mb-2">
+  <span id="inputGroup-sizing-sm">
+    <%= f.text_field :content_cont, class:"form-control input-group-prepend mx-2" %>
+  </span>
+  <span class="input-group-btn input-group-append">
+    <%= f.submit "検索", class:"btn btn-primary mx-3 px-3" %>
+  </span>
   <% end %>
-<% end %>
+</div>
 
+<div class="text-center">
+  <h4>原産地別で探す</h4>
 
+  <% @production_areas.each do |area| %>
+    <%= link_to area.genre_name, public_reviews_path(production_area_id: area.id) %>
+    <% if area.area_image.attached? %>
+      <%= image_tag area.area_image, size: "100x100" %>
+    <% else %>
+      <%= image_tag 'no_image', size: "100x100" %>
+    <% end %>
+  <% end %>
+</div>
 <!--検索がヒットしなかった場合-->
-
 <% if @reviews.present? %>
   <% @reviews.each do |review| %>
-  <div>
-    <%= image_tag review.get_image, size:"250x250" %>
-    <p>投稿ユーザー画像：<%= image_tag review.customer.get_profile_image(80,80) %></p>
-    <p>ショップ名：<%= review.item %></p>
-    <p>原産地名：<%= review.production_area.genre_name %></p>
-    <p>説明：<%= review.content %></p>
-    <%= link_to '詳細', public_review_path(review.id) %>
-    <p>ユーザーネーム：<%= review.customer.name %></p>
-  </div>
+    <div class="text-center">
+      <div><%= image_tag review.customer.get_profile_image(50,50), class:"rounded-circle mb-2 mt-3" %><%= review.customer.name %>さんのレビュー</div>
+      <div><%= image_tag review.get_image, size: "400x400" %></div>
+      <div class="mt-2">商品名：<%= review.item %></div>
+      <div class="mt-2">原産地名：<%= review.production_area.genre_name %></div>
+      <div class="mt-2">説明：<%= review.content %></div>
+      <div class="mt-2"><%= link_to '詳細', public_review_path(review.id), class:"btn btn-outline-primary w-25" %></div>
+      <div class="mt-2"><%= review.comments.count %>件のコメント</div>
+      <div class="mt-2"><%= review.favorites.count %>件役に立った</div>
+    </div>
   <% end %>
-  <% else %>
+<% else %>
 <!--検索がヒットしなかった場合-->
- <p>検索結果はありません</p>
+  <p>検索結果はありません</p>
 <% end %>
 
