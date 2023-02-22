@@ -1,5 +1,6 @@
 class Admin::ReviewsController < ApplicationController
   def index
+    # ページネーションを入れたい
     @q = Review.ransack(params[:q])
     @ransack_reviews = @q.result(distinct: true)
     @reviews = @q.result(distinct: true)

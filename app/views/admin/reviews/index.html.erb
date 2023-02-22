@@ -14,7 +14,6 @@
 <% if @reviews.present? %>
   <% @reviews.each do |review| %>
     <div class="text-center">
-      <%= link_to %>
       <div><%= image_tag review.customer.get_profile_image(50,50), class:"rounded-circle mb-2 mt-3" %><%= review.customer.name %>さんのレビュー</div>
       <div><%= image_tag review.get_image, size: "400x400" %></div>
       <div class="mt-2">商品名：<%= review.item %></div>

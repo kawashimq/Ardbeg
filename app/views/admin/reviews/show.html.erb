@@ -6,7 +6,7 @@
   <%= image_tag @review.get_image, size:"400x400" %>
   <div class="mt-2"><%= @review.item %></p>
   <div class="mt-2">説明：<%= @review.content %></p>
-  <%= link_to "レビュー削除", public_review_path(@review), method: :delete, class:"btn btn-outline-danger" %>
+  <%= link_to "レビュー削除", admin_review_path(@review), method: :delete, class:"btn btn-outline-danger" %>
 
 <!--コメント削除機能-->
   <div class="mt-4 mb-3 border-bottom"><%= @review.comments.count %>件のコメント</div>
