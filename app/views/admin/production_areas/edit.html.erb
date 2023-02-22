@@ -1,13 +1,11 @@
 <body>
   <h5 class="d-inline-block font-weight-bold mb-5 ml-5 mt-4 px-3" style="background-color: ghostwhite">原産地編集</h5>
-    <div class="container rw-80 mx-auto">
-  <%= form_with model: @production_area, url: admin_production_area_path(@production_area.id), method: :patch do |f| %>
-
-  <div class="row">
-    <label class="col-md-2 col-sm-10 col-form-label w-100 d-inline">ジャンル名</label>
-      <div class="col-md-2 col-sm-10 d-inline"><%= f.text_field :genre_name, class: "form-control" %></div>
-
-  <div class="actions col-md-3"><%= f.submit '変更を保存', class:'btn btn-sm px-4 w-50' %></div>
-<% end %>
-  </div>
+    <%= form_with model: @production_area, url: admin_production_area_path(@production_area.id), method: :patch do |f| %>
+      <div class="text-center">
+          <label class="mb-3">ジャンル名</label>
+            <div class=><%= f.text_field :genre_name, class: "mb-3 w-25" %></div>
+            <div class=><%= f.file_field :area_image, accept: "image/*", class: "mb-3" %></div>
+        <div><%= f.submit '変更を保存', class:'btn btn-outline-primary w-25' %></div>
+      <% end %>
+    </div>
 </body>

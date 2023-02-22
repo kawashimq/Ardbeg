@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+.production_img {
+  position: relative;
+  width: 180px;
+  display: inline-block;
+}
+
+.production_img p {
+  position: absolute;
+  width: 180px;
+  top: 45px;
+  left: 0;
+  text-align:center; 
+}
+.production_img p a {
+  color: white;
+}
