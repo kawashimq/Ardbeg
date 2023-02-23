@@ -22,5 +22,4 @@ private
   def customer_params
     params.require(:customer).permit(:name, :profile_image)
   end
-
 end
