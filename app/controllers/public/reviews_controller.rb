@@ -1,5 +1,6 @@
 class Public::ReviewsController < ApplicationController
   
+  before_action :authenticate_customer!, only: [:edit, :create]
   before_action :search
   def new
     @review = Review.new
@@ -11,6 +12,7 @@ class Public::ReviewsController < ApplicationController
   end
   
   def index
+    # ページネーション追加したい
     @q = Review.ransack(params[:q])
     @ransack_reviews = @q.result(distinct: true)
     @reviews = @q.result(distinct: true)

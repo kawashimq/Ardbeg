@@ -1,6 +1,6 @@
 class Public::CustomersController < ApplicationController
   
-  # before_action :is_matching_login_customer
+  before_action :authenticate_customer!, except: [:index, :show]
   
   def show
     @customer = Customer.find(params[:id])
@@ -22,13 +22,4 @@ private
   def customer_params
     params.require(:customer).permit(:name, :profile_image)
   end
-
-# idが未定義で上手く動かない他のユーザーがURLを打っても入れないようにする機能
-  # def is_matching_login_customer
-  #   customer_id = params[:id].to_i
-  #   unless customer_id == current_customer.id
-  #     redirect_to root_path
-  #   end
-  # end
-
 end
