@@ -1,8 +1,11 @@
 class Admin::CustomersController < ApplicationController
+  
+  before_action :authenticate_admin!
+  
   def index
-    @customers = Customer.all
+    @customers = Customer.page(params[:page])
   end
-# .page(params[:page]).per(10)
+  
   def show
     @customer = Customer.find(params[:id])
   end

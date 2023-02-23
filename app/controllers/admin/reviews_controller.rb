@@ -1,4 +1,7 @@
 class Admin::ReviewsController < ApplicationController
+  
+  before_action :authenticate_admin!
+  
   def index
     # ページネーションを入れたい
     @q = Review.ransack(params[:q])

@@ -1,8 +1,9 @@
 <p>コメント件数：<%= review.comments.count %></p>
 <% review.comments.each do |comment| %>
-  <p><%= image_tag comment.customer.get_profile_image(80,80) %></p>
-  <%= comment.customer.name %>
-  <%= comment.created_at.strftime('%Y/%m/%d') %>
+  <div>
+    <%= image_tag comment.customer.get_profile_image(40,40), class:"rounded-circle mr-1" %>
+    <%= comment.customer.name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %>
   <div>
     <%= comment.detail %>
     <% if comment.customer_id == current_customer.id %>

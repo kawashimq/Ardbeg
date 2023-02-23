@@ -1,5 +1,8 @@
 class Admin::ProductionAreasController < ApplicationController
   
+  before_action :authenticate_admin!
+  
+  
 def create
   @production_area = ProductionArea.new(production_area_params)
   @production_area.save
@@ -17,7 +20,7 @@ end
 def update
   @production_area = ProductionArea.find(params[:id])
   @production_area.update(production_area_params)
-   flash[:notice] = "ジャンルの更新は成功したよ🙃"
+   flash[:notice] = "ジャンルの更新成功"
    redirect_to admin_production_areas_path
 end
 
