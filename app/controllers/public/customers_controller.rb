@@ -23,7 +23,7 @@ private
     params.require(:customer).permit(:name, :profile_image)
   end
 
-# idが未定義で上手く動かない
+# idが未定義で上手く動かない他のユーザーがURLを打っても入れないようにする機能
   # def is_matching_login_customer
   #   customer_id = params[:id].to_i
   #   unless customer_id == current_customer.id
