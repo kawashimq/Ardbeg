@@ -16,7 +16,7 @@
         <div>
           <%= f.select :production_area_id, options_from_collection_for_select(ProductionArea.all, :id, :genre_name), {} %>
         </div>
-      <div><%= f.submit '変更を保存', class:'btn btn-success px-4 mt-4 w-50' %></div>
-      <div><%= link_to "レビューを削除", public_review_path(@review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:'btn btn-danger mt-2 w-50' %></div>
+      <div><%= f.submit '変更を保存', class:'btn btn-outline-success px-4 mt-4 w-50' %></div>
+      <div><%= link_to "レビューを削除", public_review_path(@review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:'btn btn-outline-danger mt-2 w-50' %></div>
     </div>
   <% end %>
