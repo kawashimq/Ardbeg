@@ -1,6 +1,7 @@
 class Public::ReviewsController < ApplicationController
   before_action :authenticate_customer!, only: [:edit, :create, :new]
   before_action :search
+  
   def new
     @review = Review.new
   end
