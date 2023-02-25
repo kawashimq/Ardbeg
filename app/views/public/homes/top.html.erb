@@ -29,9 +29,9 @@
   <% @reviews.each do |review| %>
     <div class="text-center">
       <%= link_to public_customer_path(review.customer.id), class:"text-dark" do %>
-        <div><%= image_tag review.customer.get_profile_image(50,50), class:"rounded-circle mb-2 mt-3" %><%= review.customer.name %>さんのレビュー</div>
+        <div><%= image_tag review.customer.get_profile_image(50,50), class:"rounded-circle mb-2 mt-3", style: "object-fit: cover;" %><%= review.customer.name %>さんのレビュー</div>
       <% end %>
-      <div><%= image_tag review.get_image, size: "400x400" %></div>
+      <div><%= image_tag review.get_image, size: "400x400", style: "object-fit: cover;" %></div>
       <div class="mt-2">商品名：<%= review.item %></div>
       <div class="mt-2">原産地名：<%= review.production_area.genre_name %></div>
       <div class="mt-2">説明：<%= review.content %></div>

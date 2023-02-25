@@ -4,19 +4,18 @@
 <% if @customer.email == 'guest@example.com'%>
       <p>ゲストユーザーはユーザー情報の編集ができません。</p>
   <% else %>
-    <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch do |f| %>
-
     <section class="container small">
       <div class="row flex-nowrap">
         <div class="col-md-2">
           <h6 class="mb-3">会員ID</h6>
           <h6 class="mb-3">氏名</h6>
-          <h6 class="mb-1"><%= f.label :"メールアドレス" %></h6>
+          <h6 class="mb-3">メールアドレス</h6>
           <h6>会員ステータス</h6>
         </div>
     
         <div class="col-md-10">
           <div class="mb-3"><%= @customer.id %></div>
+           <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch do |f| %>
           <div class="row">
             <div class="col-3">
               <div><%= f.text_field :name, autofocus: true, autocomplete: "last_name", class:'mb-2' %></div>
@@ -31,8 +30,9 @@
             </div>
             <div class="form-group">
             <%= f.submit '編集を保存', class:'btn btn-sm px-4', style:"width: 250px; background-color: #F3F1EA;" %>
+            <% end %>
           </div>
         </div>
       </div>
-    <% end %>
+    </section>
 <% end %>

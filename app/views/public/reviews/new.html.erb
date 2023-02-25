@@ -7,7 +7,6 @@
     <label class="mt-2">口コミ</label>
       <div><%= f.text_area :content, class: "w-25", rows: '4' %></div>
     <label>原産地</label>
-    <!--中の文字を中央ぞろえにしたい-->
     <div><%= f.select :production_area_id, options_from_collection_for_select(ProductionArea.all, :id, :genre_name), {}, class: "w-25" %></div>
     <div><%= f.submit '投稿', class: "w-25 btn btn-outline-primary mt-3" %></div>
   </div>

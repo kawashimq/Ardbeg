@@ -1,11 +1,11 @@
 <div class="text-center">
-  <p>
-    <%= image_tag @review.customer.get_profile_image(80,80), class:"rounded-circle mr-3" %>
+  <div>
+    <%= image_tag @review.customer.get_profile_image(80,80), class:"rounded-circle mr-3", style: "object-fit: cover;" %>
     <%= @review.customer.name %>
-  </p>
-  <%= image_tag @review.get_image, size:"400x400" %>
-  <p class="mt-2"><%= @review.item %></p>
-  <p class="mt-2">説明：<%= @review.content %></p>
+  </div>
+  <%= image_tag @review.get_image, size:"400x400", style: "object-fit: cover;" %>
+  <div class="mt-2"><%= @review.item %></div>
+  <div class="mt-2">説明：<%= @review.content %></div>
   
   <% if @review.customer == current_customer %>
     <%= link_to "レビュー編集", edit_public_review_path(@review), class:"btn btn-outline-success w-25 mb-2" %>
@@ -25,7 +25,4 @@
   <div id="comments_area" > 
     <%= render 'public/comments/review_comments', review: @review %>
   </div>
-  
-  
-
 </div>
