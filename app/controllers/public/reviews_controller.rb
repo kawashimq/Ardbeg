@@ -1,5 +1,4 @@
 class Public::ReviewsController < ApplicationController
-  
   before_action :authenticate_customer!, only: [:edit, :create]
   before_action :search
   def new
@@ -30,6 +29,11 @@ class Public::ReviewsController < ApplicationController
   end
   
   def show
+    unless customer_signed_in?
+      flash[:notice] = "ログインしていないと使えない機能です。"
+      redirect_to new_customer_session_path
+    end
+    
     @review = Review.find(params[:id])
     @reviews = Review.all
     @comment = Comment.new

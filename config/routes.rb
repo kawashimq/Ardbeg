@@ -3,9 +3,9 @@ Rails.application.routes.draw do
  
   root to: "public/homes#top"
   # DM機能のルーティング設定
-  resources :rooms, :only => [:show, :create] do
-    resources :messages, :only => [:create]
-  end
+  # resources :rooms, :only => [:show, :create] do
+  #   resources :messages, :only => [:create]
+  # end
   
   # 検索機能のルーティング設定
     resources :reviews do
@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     resources :production_areas, only: [:create, :edit, :index, :update, :destroy]
   end
   
-  
+  # ゲストログインのルーティング設定
   devise_scope :customer do
     post 'customers/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
