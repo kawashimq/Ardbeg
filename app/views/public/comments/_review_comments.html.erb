@@ -5,6 +5,7 @@
     <%= image_tag comment.customer.get_profile_image(40,40), class:"rounded-circle mr-1" %>
     <%= comment.customer.name %>
     <%= comment.created_at.strftime('%Y/%m/%d') %>
+    <span class="sentiment-score">感情点数<%= comment.score %></span>
   <div>
     <%= comment.detail %>
     <% if comment.customer_id == current_customer.id %>
