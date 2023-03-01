@@ -61,6 +61,8 @@ gem 'ransack'
 
 gem 'kaminari','~> 1.2.1'
 
+gem 'dotenv-rails'
+
 gem 'jquery-rails'
 
 gem 'dotenv-rails'

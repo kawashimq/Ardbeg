@@ -3,6 +3,7 @@ class Public::CommentsController < ApplicationController
   def create
     @review = Review.find(params[:review_id])
     comment = Comment.new(comment_params)
+    comment.score = Language.get_data(comment_params[:detail])
     comment.customer_id = current_customer.id
     comment.review_id = @review.id
     comment.save  
