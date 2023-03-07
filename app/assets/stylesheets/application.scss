@@ -1,0 +1,127 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+.production_img {
+  position: relative;
+  width: 180px;
+  display: inline-block;
+}
+
+.production_img p {
+  position: absolute;
+  width: 180px;
+  top: 45px;
+  left: 0;
+  text-align:center; 
+}
+
+.production_img p a {
+  color: white;
+}
+
+.header-img {
+  background-image: url( asset_path('whiskey-ge26896200_1920.jpg'));
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+}
+
+
+.pager {
+  display: flex;
+  justify-content: center;
+}
+
+.inquiry_font {
+  font-size: 5px;
+}
+
+#modal-overlay {
+  display: none;   /* デフォルトは非表示 */
+  z-index: 1;      /* モーダルウィンドウと通常画面の間に表示 */
+  position: fixed; /* 表示を固定してスクロールで動かさない */
+  top: 0;          /* 全画面表示なので0 */
+  left: 0;         /* 全画面表示なので0 */
+  width: 100%;     /* 全画面表示なので100% */
+  height: 100%;    /* 全画面表示なので100%。スマートフォンでの表示対応する場合は120%に */
+  background-color: rgba(0,0,0,0.75); /* 背景を黒の半透明に */
+}
+
+#modal-content {
+  z-index: 2;      /* 最前面に表示 */
+  position: fixed; /* 表示位置を固定 */
+  top: 50%;        /* 画面中央に表示 */
+  left: 50%;       /* 画面中央に表示 */
+  transform: translate(-50%, -50%); /* モーダルウィンドウの大きさ分中央にずらす */
+  /* 以下はモーダルウィンドウの外観。ご自由に */
+  width: 350px;
+  margin: 1.5em auto 0;
+  padding: 10px 20px;
+  border: 2px solid #aaa;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.modal-message {
+  text-align: center;
+}
+
+.modal-button-area {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 以下はボタン用CSS */
+.btn {
+  line-height: 1.5;
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  border-radius: 0.5rem;
+}
+
+.btn--delete {
+  color: #fff;
+  background: red;
+  font-weight: bold;
+  font-size: large ;
+  box-shadow: 0px 3px 4px 0px rgba(0,0,0,0.6);
+}
+
+.btn--delete:hover {
+  background: rgb(245, 151, 151);
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+.btn--cancel {
+  width: 100px;
+  color: rgb(19, 142, 236) !important;
+  background: white;
+  font-weight: bold;
+  font-size: large ;
+  border: solid 1px blue;
+  box-shadow: 0px 3px 4px 0px rgba(0,0,0,0.6);
+}
+
+.btn--cancel:hover {
+  background-color: rgb(207, 207, 249);
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2);
+}

@@ -15,7 +15,7 @@
 
   <body>
     <header style="width: 100%; background-color: #F3F1EA">
-      <div>
+      <div class="header-img">
         <nav class="navbar navbar-expand-sm">
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -24,7 +24,7 @@
             <% if admin_signed_in? %>
               <div class="collapse navbar-collapse justify-content-end">
                 <div class="navbar-nav ml-auto list-unstyled">
-              <%=  link_to  admin_reviews_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+              <%=  link_to  admin_reviews_path,class: 'm-4 nav-link btn btn-outline-light' do %>
                 投稿一覧
               <% end %>
               
@@ -36,10 +36,6 @@
                 原産地名一覧
               <% end %>
               
-              <%=  link_to  admin_inquiries_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
-                お問い合わせ一覧
-              <% end %>
-              
               <%= link_to destroy_admin_session_path, method: :delete,class: 'm-4 nav-link btn btn-outline-secondary' do %>
                 ログアウト
               <% end %>
@@ -47,35 +43,26 @@
               </div>
           
             <% elsif customer_signed_in? %>
-            <!--logoの設定-->
-              <%= link_to root_path, class:'navbar-brand text-dark' do %>
-                Ardbeg
-              <% end %>
               <div class="collapse navbar-collapse justify-content-end">
                 <div class="navbar-nav ml-auto list-unstyled">
-
-                  
-                  <%= link_to new_public_review_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                  <%= link_to new_public_review_path,class: 'm-4 nav-link btn btn-dark' do %>
                     投稿フォーム
                   <% end %>
                   
-                  <%= link_to public_reviews_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                  <%= link_to public_reviews_path,class: 'm-4 nav-link btn btn-dark' do %>
                     口コミ一覧
                   <% end %>
         
-                  <%= link_to public_customer_path(current_customer.id),class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                  <%= link_to public_customer_path(current_customer.id),class: 'm-4 nav-link btn btn-dark' do %>
                     マイページ
                   <% end %>
         
-                  <%= link_to destroy_customer_session_path, method: :delete,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                  <%= link_to destroy_customer_session_path, method: :delete,class: 'm-4 nav-link btn btn-dark' do %>
                     ログアウト
                   <% end %>
                 </div>
               </div>
               <% else %>
-                <%= link_to root_path, class:'navbar-brand text-dark' do %>
-                  Ardbeg
-                <% end %>
                 <div class="collapse navbar-collapse justify-content-end">
                   <div class="navbar-nav ml-auto list-unstyled">
                     
@@ -91,6 +78,22 @@
                   </div>
                 </div>
               <% end %>
+        </nav>
+        <!--logoの設定-->
+              <%= link_to root_path, class:'text-white' do %>
+                <h1 class="text-center">Ardbeg</h1>
+              <% end %>
+              <!--検索フォーム-->
+            <%= search_form_for @q,url: public_reviews_path do |f|%>
+            <div class="input-group w-50 mt-2">
+              <span id="inputGroup-sizing-sm ">
+                <%= f.text_field :content_cont, class:"form-control input-group-prepend mx-2 " %>
+              </span>
+              <span class="input-group-btn input-group-append">
+                <%= f.submit "検索", class:"btn btn-primary mx-3 px-3" %>
+              </span>
+              <% end %>
+            </div>
     </header>
     <%= notice %>
     <%= yield %>
@@ -106,11 +109,9 @@
           <div class="col-md-2">
             <p>利用規約</p>
             <p>ご利用ガイド</p>
-            <div class="inquiry_font">
-              <%= link_to new_public_inquiry_path, class:'navbar-brand text-dark' do %>
-                お問い合わせ
-              <% end %>
-            </div>
+            <%= link_to new_public_inquiry_path, class:'navbar-brand text-dark' do %>
+              <div>お問い合わせ</div>
+            <% end %>
           </div>
           <div class="col-md-2">
             <p>よくあるご質問</p>
@@ -124,5 +125,4 @@
       </div>
     </footer>
   </body>
-  
   

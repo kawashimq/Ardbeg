@@ -1,0 +1,17 @@
+<h6 class="d-inline-block font-weight-bold mb-3 mt-4 ml-5 px-3" style="background-color: ghostwhite">お問い合わせ一覧</h6>
+  <table  class="ml-auto mr-auto w-75">
+    <thead class="border-bottom border-top border-secondary" style="background-color: ghostwhite">
+      <tr>
+        <th>メールアドレス</th>
+        <th>問い合わせ内容</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @inquiry.each do |inquiries| %>
+      <tr>
+        <td class="py-1"><%= inquiries.email %></td>
+        <td><%= inquiries.content_inquiry %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>

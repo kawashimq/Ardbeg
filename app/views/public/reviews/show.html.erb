@@ -17,11 +17,11 @@
   <div id="favorite_buttons_<%= @review.id %>">
     <%= render "public/favorites/favorite", review: @review %>
   </div>
-<!--コメント一覧-->
+<!--コメントフォーム-->
   <div id="new-comment">
-    <%= render 'public/comments/form', review: @review, comment: @comment %>
+    <%= render 'public/comments/form_show', review: @review, comment: @comment %>
   </div>
-  <!--コメントフォーム-->
+  <!--コメント一覧-->
   <div id="comments_area" > 
     <%= render 'public/comments/review_comments', review: @review %>
   </div>

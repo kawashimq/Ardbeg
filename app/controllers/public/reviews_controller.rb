@@ -8,17 +8,15 @@ class Public::ReviewsController < ApplicationController
     
   def search
     @q = Review.ransack(params[:q])
-    @reviews = @q.result(distinct: true)
+    @reviews = @q.result(distinct: true).page
   end
   
   def index
-    # ページネーション追加したい
     @q = Review.ransack(params[:q])
-    @ransack_reviews = @q.result(distinct: true)
-    @reviews = @q.result(distinct: true)
+    @reviews = @q.result(distinct: true).page
     if params[:production_area_id]
       @production_area = ProductionArea.find(params[:production_area_id])
-      @reviews = @production_area.reviews
+      @reviews = @production_area.reviews.page
     end 
   end
   
@@ -34,7 +32,6 @@ class Public::ReviewsController < ApplicationController
       flash[:notice] = "ログインしていないと使えない機能です。"
       redirect_to new_customer_session_path
     end
-    
     @review = Review.find(params[:id])
     @reviews = Review.all
     @comment = Comment.new
