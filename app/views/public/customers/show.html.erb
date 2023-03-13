@@ -10,27 +10,31 @@
 <!-- ユーザーの投稿一覧 -->
 <h4 class="text-center border-top">レビュー履歴</h4>
 <div class="container py-5">
-  <% @reviews.each do |review| %>
-  <div class="card mx-auto w-50 mt-4 shadow-lg">
-  <%= link_to public_reviews_path(review.id) do %>
-    <%= image_tag review.get_image, size: "320x320", class:"card-img-top ", style: "object-fit: cover;" %>
-  <% end %>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-12">
-          <p class="card-title">商品名：<%= review.item %></p>
-          <p class="card-text">説明：<%= review.content %></p>
-          <% if review.customer == current_customer %>
-            <div class="text-center">
-              <%= link_to "レビュー編集", edit_public_review_path(review), class:"btn btn-outline-success w-50" %>
-              <%= link_to "レビュー削除", public_review_path(review), method: :delete, class:"btn btn-outline-danger w-50" %>
+  <div class="row">
+    <% @reviews.each do |review| %>
+    <div class="col-md-6 offset-md-3">
+      <div class="card mx-auto mt-4 shadow-lg">
+        <%= link_to public_reviews_path(review.id) do %>
+          <%= image_tag review.get_image, size: "320x320", class:"card-img-top ", style: "object-fit: cover;" %>
+        <% end %>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <p class="card-title">商品名：<%= review.item %></p>
+              <p class="card-text">説明：<%= review.content %></p>
+              <% if review.customer == current_customer %>
+                <div class="text-center">
+                  <%= link_to "レビュー編集", edit_public_review_path(review), class:"btn btn-outline-success w-50" %>
+                  <%= link_to "レビュー削除", public_review_path(review), method: :delete, class:"btn btn-outline-danger w-50" %>
+                </div>
+              <% end %>
             </div>
-          <% end %>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</div>
   <!--ページネーション機能-->
   <div class="pager mt-3"><%= paginate @reviews %></div>
   <% end %>
-</div>
