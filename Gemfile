@@ -73,3 +73,6 @@ end
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
+
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'

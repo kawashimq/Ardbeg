@@ -1,0 +1,4 @@
+<%= form_with model: [review, comment], url: public_review_comments_path(review), local: false do |f| %>
+  <div><%= f.text_area :detail, rows: '5', placeholder: "コメントをここに", id: "comment_form", class:"w-25", rows:"4" %></div>
+  <%= f.submit "送信する" %>
+<% end %>

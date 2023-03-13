@@ -1,6 +1,6 @@
 <div class="text-center">
   <div>
-    <%= image_tag @review.customer.get_profile_image(80,80), class:"rounded-circle mr-3", style: "object-fit: cover;" %>
+    <%= image_tag @review.customer.get_profile_image(80,80), class:"rounded-circle mb-2 mt-3", style: "object-fit: cover;" %>
     <%= @review.customer.name %>
   </div>
   <%= image_tag @review.get_image, size:"400x400", style: "object-fit: cover;" %>
@@ -17,12 +17,12 @@
   <div id="favorite_buttons_<%= @review.id %>">
     <%= render "public/favorites/favorite", review: @review %>
   </div>
-<!--コメント一覧-->
+<!--コメントフォーム-->
   <div id="new-comment">
-    <%= render 'public/comments/form', review: @review, comment: @comment %>
+    <%= render 'public/comments/form_show', review: @review, comment: @comment %>
   </div>
-  <!--コメントフォーム-->
+  <!--コメント一覧-->
   <div id="comments_area" > 
-    <%= render 'public/comments/review_comments', review: @review %>
+    <%= render 'public/comments/review_comments', comments: @comments %>
   </div>
 </div>

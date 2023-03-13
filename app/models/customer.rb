@@ -2,13 +2,14 @@ class Customer < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-         
+         :recoverable, :rememberable, :validatable,
+         :omniauthable
   has_many :reviews, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :rooms
 
+  
+  # validates :uid, presence: true, uniqueness: { scope: :provider }, if: -> { uid.present? }
   
   #ユーザーごとのプロフィール画像を保存
   has_one_attached :profile_image
@@ -29,4 +30,14 @@ class Customer < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
+  
+  
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |customer|
+      customer.email = auth.info.email
+      customer.password = Devise.friendly_token[0, 20]
+    end
+  end
+  
+  
 end

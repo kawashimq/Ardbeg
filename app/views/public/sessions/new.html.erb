@@ -31,6 +31,7 @@
       <h6 class="d-inline-block font-weight-bold mx-3 px-3" style="background-color: ghostwhite">会員登録がお済みでない方</h6>
       <div class="pl-5 ml-5">
         <%= link_to 'こちら', new_customer_registration_path %>から新規登録を行ってください。
+        <%= link_to "Googleでログイン", "/customers/auth/google_oauth2", method: :post %>
       </div>
     </div>
   </div>

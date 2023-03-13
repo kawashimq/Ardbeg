@@ -7,6 +7,7 @@ class Public::CommentsController < ApplicationController
     comment.customer_id = current_customer.id
     comment.review_id = @review.id
     comment.save  
+    @comments = @review.comments.page(params[:page])
   end
   
   def destroy
@@ -17,7 +18,7 @@ class Public::CommentsController < ApplicationController
   
   
   private
-
+  
   def comment_params
     params.require(:comment).permit(:detail)
   end

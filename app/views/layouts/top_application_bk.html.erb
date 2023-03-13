@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ardbeg</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+    <header class="sticky-top" style="width: 100%; background-color: #F3F1EA">
+      <div class="header-img">
+        <nav class="navbar navbar-expand-md">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="container-fluid">
+            <% if admin_signed_in? %>
+              <div class="collapse navbar-collapse justify-content-end">
+                <div class="navbar-nav ml-auto list-unstyled">
+              <%=  link_to  admin_reviews_path,class: 'm-4 nav-link btn btn-outline-light' do %>
+                投稿一覧
+              <% end %>
+              
+              <%= link_to admin_customers_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                会員一覧
+              <% end %>
+              
+              <%= link_to admin_production_areas_path,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                原産地名一覧
+              <% end %>
+              
+              <%= link_to destroy_admin_session_path, method: :delete,class: 'm-4 nav-link btn btn-outline-secondary' do %>
+                ログアウト
+              <% end %>
+                </div>
+              </div>
+          
+            <% elsif customer_signed_in? %>
+              <div class="collapse navbar-collapse justify-content-end">
+                <div class="navbar-nav ml-auto list-unstyled">
+                  <%= link_to new_public_review_path,class: 'm-4 nav-link btn btn-dark' do %>
+                    投稿フォーム
+                  <% end %>
+                  
+                  <%= link_to public_reviews_path,class: 'm-4 nav-link btn btn-dark' do %>
+                    口コミ一覧
+                  <% end %>
+        
+                  <%= link_to public_customer_path(current_customer.id),class: 'm-4 nav-link btn btn-dark' do %>
+                    マイページ
+                  <% end %>
+        
+                  <%= link_to destroy_customer_session_path, method: :delete,class: 'm-4 nav-link btn btn-dark' do %>
+                    ログアウト
+                  <% end %>
+                </div>
+              </div>
+              <% else %>
+                <div class="collapse navbar-collapse justify-content-end">
+                  <div class="navbar-nav ml-auto list-unstyled">
+                    
+                    <li><%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, method: :post, class: 'm-4 nav-link btn btn-dark' %></li>
+                    
+                    <%= link_to new_customer_registration_path,class: 'm-4 nav-link btn btn-dark' do %>
+                      新規登録
+                    <% end %>
+                    
+                    <%= link_to new_customer_session_path,class: 'm-4 nav-link btn btn-dark' do %>
+                      ログイン
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+        </nav>
+        <!--logoの設定-->
+              <%= link_to root_path, class:'text-white' do %>
+                <h1 class="text-center">Ardbeg</h1>
+              <% end %>
+              <!--検索フォーム-->
+            <%= search_form_for @q,url: public_reviews_path do |f|%>
+            <div class="input-group w-50 mt-2">
+              <span id="inputGroup-sizing-sm ">
+                <%= f.text_field :content_cont, class:"form-control input-group-prepend mx-2 " %>
+              </span>
+              <span class="input-group-btn input-group-append">
+                <%= f.submit "検索", class:"btn btn-primary mx-3 px-3" %>
+              </span>
+              <% end %>
+            </div>
+    </header>
+    <%= notice %>
+    <%= yield %>
+    <footer>
+      <div class="w-100 mt-5 mb-5" style="background-color: #F3F1EA; height: 70px"></div>
+      <div class="container small my-5 pt-4">
+        <div class="row justify-content-center">
+          <div class="col-md-3">
+            <%= link_to root_path, class:'navbar-brand text-dark' do %>
+              Ardbeg
+            <% end %>
+          </div>
+          <div class="col-md-2">
+            <p>利用規約</p>
+            <p>ご利用ガイド</p>
+            <%= link_to new_public_inquiry_path, class:'navbar-brand text-dark' do %>
+              <div>お問い合わせ</div>
+            <% end %>
+          </div>
+          <div class="col-md-2">
+            <p>よくあるご質問</p>
+            <p>プライバシーポリシー</p>
+            <p>特定商取引法に基づく表記</p>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-4" style="font-size: 5px;">
+        ©2023 Ardbeg. All Rights Reserved.
+      </div>
+    </footer>
+  </body>
+  

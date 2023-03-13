@@ -1,0 +1,10 @@
+<%= form_with model: @inquiry, url:public_inquiries_path do |f| %>
+  <div class="mb-3 text-center">
+    <label class="mt-2">メールアドレス</label>
+    <div><%= f.text_field :email, class: "w-25", rows: '5' %></div>
+    <label class="mt-2">問い合わせ内容</label>
+      <div><%= f.text_area :content_inquiry, class: "w-25", rows: '5' %></div>
+    <div><%= f.submit '送信', class: "w-25 btn btn-outline-primary mt-3" %></div>
+  </div>
+<% end %>
+  

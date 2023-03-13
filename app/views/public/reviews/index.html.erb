@@ -1,7 +1,8 @@
 <%= search_form_for @q,url: public_reviews_path do |f|%>
 <div class="input-group w-50 mt-2 mb-2">
   <span id="inputGroup-sizing-sm">
-    <%= f.text_field :content_cont, class:"form-control input-group-prepend mx-2" %>
+    <%= f.text_field :content_cont, class:"form
+    -control input-group-prepend mx-2" %>
   </span>
   <span class="input-group-btn input-group-append">
     <%= f.submit "検索", class:"btn btn-primary mx-3 px-3" %>
@@ -11,23 +12,68 @@
   
 
 <!--検索がヒットしなかった場合-->
-<% if @reviews.present? %>
-  <% @reviews.each do |review| %>
-    <div class="text-center">
-      <%= link_to public_customer_path(review.customer.id), class:"text-dark" do %>
-        <div><%= image_tag review.customer.get_profile_image(50,50), class:"rounded-circle mb-2 mt-3", style: "height: 50px; width: 50px; object-fit: cover;" %><%= review.customer.name %>さんのレビュー</div>
-      <% end %>
-      <div><%= image_tag review.get_image, size: "400x400", style: "object-fit: cover;" %></div>
-      <div class="mt-2">商品名：<%= review.item %></div>
-      <div class="mt-2">原産地名：<%= review.production_area.genre_name %></div>
-      <div class="mt-2">説明：<%= review.content %></div>
-      <div class="mt-2"><%= link_to '詳細', public_review_path(review.id), class:"btn btn-outline-primary w-25" %></div>
-      <div class="mt-2"><%= review.comments.count %>件のコメント</div>
-      <div class="mt-2"><%= review.favorites.count %>件役に立った</div>
-    </div>
-  <% end %>
-<% else %>
-<!--検索がヒットしなかった場合-->
-  <p>検索結果はありません</p>
-<% end %>
+<div class="container py-5">
+  <% if @reviews.present? %>
+  <div class="row">
+    <% @reviews.each do |review| %>
+    <div class="col-md-6 offset-md-3">
+      <div class="card mx-auto mt-4 shadow-lg">
+        <%= link_to public_review_path(review.id) do %>
+        <%= image_tag review.get_image, size: "400x400", style: " object-fit: cover;", class:"card-img-top"; %>
+        <% end %>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-2">
+              <%= link_to public_customer_path(review.customer.id), class:"text-dark" do %>
+              <%= image_tag review.customer.get_profile_image(50,50), class:"mt-3 rounded-circle", style: "height: 50px; width: 50px; object-fit: cover;" %>
+              <% end %>
+            </div>
 
+            <div class="col-10">
+              <p class="card-title">
+
+                <%= link_to public_review_path(review.id), class:"text-dark" do %>
+                <strong><span><%= review.item %></span></strong>
+                <% end %>
+              </p>
+              <p>原産地名：<%= review.production_area.genre_name %></p>
+              <p class="card-text">説明：<%= review.content %></p>
+              <%= link_to public_customer_path(review.customer.id), class:"text-dark" do %>
+              <span><i class="fas fa-user"></i> By <%= review.customer.name %><% end %> | コメント</span>
+
+              <%= link_to root_path(review_id: review.id), class:"text-dark", remote: true do %>
+              <i class=" far fa-comment"></i><%= review.comments.count %> |
+              <% end %>
+              役に立った<i class="far fa-thumbs-up ml-2"></i><%= review.favorites.count %>
+              <!--モーダルウィンドウ部分-->
+              <div class="modal" id="exampleModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">コメント</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div id="new-comment">
+                      <% if @review.present? %>
+                      <%= render 'public/comments/form', review: @review, comment: @comment %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <!--ページネーション機能-->
+  <div class="pager mt-3"><%= paginate @reviews %></div>
+  <% else %>
+</div>
+<!--検索がヒットしなかった場合-->
+<p>検索結果はありません</p>
+<% end %>

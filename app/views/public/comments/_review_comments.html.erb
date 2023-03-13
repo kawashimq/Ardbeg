@@ -1,8 +1,8 @@
 <!--コメントindex機能テンプレート-->
-<p>コメント件数：<%= review.comments.count %></p>
-<% review.comments.each do |comment| %>
+<p>コメント件数：<%= comments.count %></p>
+<% comments.each do |comment| %>
   <div>
-    <%= image_tag comment.customer.get_profile_image(40,40), class:"rounded-circle mr-1" %>
+    <%= image_tag comment.customer.get_profile_image(30,30), class:"rounded-circle mb-2 mt-3", style: "height: 30px; width: 30px; object-fit: cover;" %>
     <%= comment.customer.name %>
     <%= comment.created_at.strftime('%Y/%m/%d') %>
     <span class="sentiment-score">感情点数<%= comment.score %></span>
@@ -13,3 +13,4 @@
     <% end %>
   </div>
 <% end %>
+<div class="pager mt-3"><%= paginate comments %></div>
