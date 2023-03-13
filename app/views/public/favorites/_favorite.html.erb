@@ -3,15 +3,15 @@
   <% if current_customer.email == 'guest@example.com' %>
     <!-- ゲストログインの場合-->
     <%= link_to new_customer_session_path do %>
-      ♥<%= review.favorites.count %>役に立った
+      <i class="fas fa-thumbs-up"></i><%= review.favorites.count %>役に立った
     <% end %>
     <% elsif review.favorited_by?(current_customer) %>
       <%= link_to  public_review_favorites_path(review), method: :delete, remote: true do %>
-        ♥<%= review.favorites.count %>役に立った
+        <i class="fas fa-thumbs-up"></i><%= review.favorites.count %>役に立った
       <% end %>
     <% elsif %>
       <%= link_to  public_review_favorites_path(review), method: :post, remote: true do %>
-        ♡<%= review.favorites.count %>役に立った
+        <i class="far fa-thumbs-up ml-2"></i><%= review.favorites.count %>役に立った
       <% end %>
   <% end %>
 </div>

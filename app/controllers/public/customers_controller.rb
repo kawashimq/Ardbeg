@@ -4,7 +4,7 @@ class Public::CustomersController < ApplicationController
   
   def show
     @customer = Customer.find(params[:id])
-    @reviews = @customer.reviews
+    @reviews = @customer.reviews.page(params[:page])
   end
 
   def edit
@@ -20,6 +20,6 @@ class Public::CustomersController < ApplicationController
 private
 
   def customer_params
-    params.require(:customer).permit(:name, :profile_image)
+    params.require(:customer).permit(:name, :profile_image, :review_id)
   end
 end

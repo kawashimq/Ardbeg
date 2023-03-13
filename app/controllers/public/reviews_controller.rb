@@ -35,7 +35,7 @@ class Public::ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @reviews = Review.all
     @comment = Comment.new
-    @comments = Comment.all
+    @comments = @review.comments.page(params[:page])
   end
   
   def edit
