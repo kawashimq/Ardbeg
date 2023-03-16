@@ -6,7 +6,7 @@ class Public::CommentsController < ApplicationController
     comment.score = Language.get_data(comment_params[:detail])
     comment.customer_id = current_customer.id
     comment.review_id = @review.id
-    comment.save  
+    comment.save
     @comments = @review.comments.page(params[:page])
   end
   
@@ -23,6 +23,4 @@ class Public::CommentsController < ApplicationController
     params.require(:comment).permit(:detail)
   end
 
-  
-  
 end

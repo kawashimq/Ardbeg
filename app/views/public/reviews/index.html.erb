@@ -9,8 +9,6 @@
   </span>
   <% end %>
 </div>
-  
-
 <!--検索がヒットしなかった場合-->
 <div class="container py-5">
   <% if @reviews.present? %>
@@ -69,12 +67,12 @@
       </div>
     </div>
     <% end %>
+    <!--ページネーション機能-->
+    <div class="pager mt-3"><%= paginate @reviews %></div>
+    <% else %>
+    <!--検索がヒットしなかった場合-->
+    <h3 class="text-center">検索結果はありません</h3>
+    <% end %>
   </div>
 </div>
-  <!--ページネーション機能-->
-  <div class="pager mt-3"><%= paginate @reviews %></div>
-  <% else %>
-
-<!--検索がヒットしなかった場合-->
-<p>検索結果はありません</p>
-<% end %>
+  
