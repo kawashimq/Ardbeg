@@ -41,25 +41,50 @@
               <p class="card-text">説明：<%= review.content %></p>
               <%= link_to public_customer_path(review.customer.id), class:"text-dark" do %>
               <span><i class="fas fa-user"></i> By <%= review.customer.name %><% end %> | コメント</span>
-
-              <%= link_to root_path(review_id: review.id), class:"text-dark", remote: true do %>
-              <i class=" far fa-comment"></i><%= review.comments.count %> |
-              <% end %>
+              <i  data-toggle="modal" data-target="#exampleModal"  class=" far fa-comment"></i><%= review.comments.count %> |
               役に立った<i class="far fa-thumbs-up ml-2"></i><%= review.favorites.count %>
               <!--モーダルウィンドウ部分-->
-              <div class="modal" id="exampleModal" tabindex="-1" role="dialog">
+              <div class="modal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">コメント</h5>
+                      <h5 class="modal-title">コメントフォーム</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <div id="new-comment">
-                      <% if @review.present? %>
-                      <%= render 'public/comments/form', review: @review, comment: @comment %>
-                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Button trigger modal -->
+              <button >
+              </button>
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                                    <%= form_with model: [@review, @comment], url: public_review_comments_path(review), local: false do |f| %>
+  <div class="modal-body">
+    <div><%= f.text_area :detail, rows: '5', placeholder: "コメントをここに", id: "comment_form", class:"form-control" %></div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+    <%= f.submit "送信する", class:"btn btn-primary" %>
+  </div>
+<% end %>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
                     </div>
                   </div>
                 </div>

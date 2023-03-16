@@ -1,19 +1,22 @@
 class Public::CommentsController < ApplicationController
   
   def create
+    
     @review = Review.find(params[:review_id])
     comment = Comment.new(comment_params)
     comment.score = Language.get_data(comment_params[:detail])
     comment.customer_id = current_customer.id
     comment.review_id = @review.id
     comment.save
-    @comments = @review.comments.page(params[:page])
+    @comments = @review.comments
+    # byebug
   end
-  
+
   def destroy
-    Comment.find_by(id: params[:id], review_id: params[:review_id]).destroy
-    flash[:notice] = 'コメントを削除しました'
-    @review = Review.find(params[:review_id])
+    Comment.find(params[:id]).destroy
+    @comments = Review.find(params[:review_id]).comments
+    # flash[:notice] = 'コメントを削除しました'
+    render 'public/comments/destroy'
   end
   
   
