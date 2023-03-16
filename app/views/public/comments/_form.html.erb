@@ -1,5 +1,5 @@
 <!--モーダルウィンドウで使っている方-->
-<%= form_with model: [review, comment], url: public_review_comments_path(review), local: false do |f| %>
+<%= form_with model: [review, comment], url: public_review_comments_path(:review_id), local: false do |f| %>
   <div class="modal-body">
     <div><%= f.text_area :detail, rows: '5', placeholder: "コメントをここに", id: "comment_form", class:"form-control" %></div>
   </div>
