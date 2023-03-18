@@ -14,6 +14,7 @@ class Public::ReviewsController < ApplicationController
   def index
     @q = Review.ransack(params[:q])
     @reviews = @q.result(distinct: true).page
+    @comment = Comment.new
     if params[:production_area_id]
       @production_area = ProductionArea.find(params[:production_area_id])
       @reviews = @production_area.reviews.page

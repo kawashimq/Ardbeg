@@ -45,27 +45,7 @@
               <i data-toggle="modal" data-target="#exampleModal_<%= review.id %>" class=" far fa-comment"></i><span id="count_<%= review.id %>"><%= render "public/comments/comment_count", count: review.comments.count  %></span> |
               役に立った<i class="far fa-thumbs-up ml-2"></i><%= review.favorites.count %>
               <!-- Modal -->
-              <div class="modal fade" id="exampleModal_<%= review.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel_<%= review.id %>" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel_<%= review.id %>">コメントフォーム</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <%= form_with model: [@review, @comment], url: public_review_comments_path(review), local: false do |f| %>
-                      <%= f.text_area :detail, rows: '5', placeholder: "コメントをここに", id: review.id, class:"form-control" %>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-                      <%= f.submit "送信する", class:"btn btn-primary" %>
-                    </div>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
+              <%= render "public/comments/comment_modal", review: review, comment: @comment %>
             </div>
           </div>
         </div>
