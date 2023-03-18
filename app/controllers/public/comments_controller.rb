@@ -9,7 +9,6 @@ class Public::CommentsController < ApplicationController
     comment.review_id = @review.id
     comment.save
     @comments = @review.comments
-    # byebug
   end
 
   def destroy

@@ -1,3 +1,6 @@
 $("#comments_area").html("<%= j(render 'public/comments/review_comments', comments: @comments) %>");
 <!--フォームを送信したあとにフォームを空にする-->
-$("#comment_form").val('');
+$("#exampleModal_<%= @review.id%>").css("display", "block")
+$("#count_<%= @review.id %>").html("<%= j(render 'public/comments/comment_count', count: @review.comments.count) %>");
+
+$("textarea").val("");

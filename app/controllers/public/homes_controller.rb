@@ -12,6 +12,8 @@ class Public::HomesController < ApplicationController
       @production_area = ProductionArea.find(params[:production_area_id])
       @reviews = @production_area.reviews
     end
+    
+
   end
   
 end
