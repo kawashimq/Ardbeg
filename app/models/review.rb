@@ -12,8 +12,9 @@ class Review < ApplicationRecord
     
   def get_image
     unless image.attached?
-      file_path = Rails.root.join('app/assets/images/no_image.jpg')
-      image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+      # 画像が何も投稿されていない場合は彼岸花の写真が表示される
+      file_path = Rails.root.join('app/assets/images/DSC_0581.JPG')
+      image.attach(io: File.open(file_path), filename: 'DSC_0581.JPG')
     end
     image
   end

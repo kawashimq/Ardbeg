@@ -24,7 +24,7 @@
 - 飲んだ時の感情のを共感したい際
 
 ## 設計書
-<...>
+- [実装機能リスト](https://docs.google.com/spreadsheets/d/1qSoYXJTrAWRm0R_3MJ_aIkLOXyJaDj9_CMuRXjj2iTk/edit?usp=sharing)
 
 ## 開発環境
 - OS：Linux(CentOS)
@@ -34,4 +34,4 @@
 - IDE：Cloud9
 
 ## 使用素材
-- 使用検討中です。
+- https://pixabay.com/ja/
